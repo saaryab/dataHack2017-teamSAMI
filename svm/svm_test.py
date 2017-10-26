@@ -66,7 +66,7 @@ else:
 # test against all classifiers
 logger.log('test classifiers joint accuracy')
 correct_predictions_counter = 0
-confusion_matrix = np.zeros((25, 25))
+# confusion_matrix = np.zeros((25, 25))
 for i in range(len(x_test)):
     max_prob = 0
     max_prob_class = 0

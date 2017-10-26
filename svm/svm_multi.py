@@ -1,5 +1,7 @@
 
 from sklearn import svm
+import numpy as np
+# from sklearn.metrics import confusion_matrix
 # from sklearn.model_selection import cross_val_score
 import threading
 
@@ -50,6 +52,30 @@ class SvmMulti:
         self.__logger.log('score of {class_name} is: {classifier_score}'.format(
             class_name=class_name, classifier_score=classifier_score
         ))
+
+        # print confusion matrix
+        # y_pred = clf.predict(self.__x_test)
+        # self.__logger.log('confusion matrix of {class_name}: {confusion_matrix}'.format(
+        #     class_name=class_name, confusion_matrix=confusion_matrix(class_y_test, y_pred))
+        # )
+
+        # calculate confusion matrix
+        confusion_matrix_fp = np.zeros(25)
+        predictions = clf.predict(self.__x_test)
+        correct_predictions = 0
+        for i in range(len(self.__x_test)):
+            if predictions[i] != class_y_test[i]:
+                if predictions[i] == 1:
+                    confusion_matrix_fp[self.__y_test[i] - 1] += 1
+            else:
+                correct_predictions += 1
+
+        self.__logger.log('conf. matrix accuracy score of {class_name}: {score}'.format(
+            class_name=class_name, score=float(correct_predictions)/len(self.__x_test))
+        )
+        self.__logger.log('[{class_name}] FP (say it was him and wrong): {conf_fp}'.format(
+            class_name=class_name, conf_fp=confusion_matrix_fp)
+        )
 
         # add classifier info
         with self.__classifiers_list_lock:
