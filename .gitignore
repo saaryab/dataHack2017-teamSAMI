@@ -1,8 +1,6 @@
 svm/.idea/*
-
 svm/__pycache__/*
-
 *.pyc
-
 *.csv
-.idea/*
+*.idea/*
+*__pycache__/*
