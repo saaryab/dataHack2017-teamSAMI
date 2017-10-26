@@ -2,3 +2,5 @@ svm/.idea/*
 svm/__pycache__/*
 *.pyc
 *.csv
+*.idea/*
+*__pycache__/*
