@@ -24,7 +24,7 @@ def flat_dataset(dataset):
     return flatten_dataset
 
 
-def load_dataset(split=True):
+def load_dataset(split=True, allowed_classes=None):
     file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'dataset', 'train.csv')
     csv_reader = reader(open(file_path, 'rt'))
 
@@ -37,6 +37,13 @@ def load_dataset(split=True):
             first_row = False
             continue
 
+        sample_class = int(row[len(row) - 1])
+        if allowed_classes is not None:
+            if len(allowed_classes) > 1 and sample_class not in allowed_classes:
+                continue
+            elif sample_class != allowed_classes[0]:
+                sample_class = 0
+
         sample = list()
         for cell_index in range(1, len(row)-3, 7):
             feature_set = row[cell_index+1:cell_index+7]
@@ -44,9 +51,6 @@ def load_dataset(split=True):
                 sample.append(np.zeros(6))
             else:
                 sample.append(list(map(float, feature_set)))
-
-        # sample_class = get_one_hot_rep(int(row[len(row)-1]))
-        sample_class = int(row[len(row) - 1])
 
         X_train.append(sample)
         y_train.append(sample_class)

@@ -1,1 +1,4 @@
-svm/
+svm/.idea/*
+svm/__pycache__/*
+*.pyc
+*.csv
