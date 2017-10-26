@@ -43,7 +43,7 @@ if DUMP_PATH is None:
 
     dump_file_lines = list()
     for classifier in classifiers:
-        classifier_line = '\t'.join([str(classifier[0]), pickle.dumps(classifier[1]), str(classifier[2])])
+        classifier_line = '\t'.join([str(classifier[0]), str(pickle.dumps(classifier[1])), str(classifier[2])])
         dump_file_lines.append(classifier_line)
 
     file_name = 'dumps/classifiers__{timestamp}.pkl'.format(timestamp=time.strftime('%d_%m_%Y__%H_%M_%S'))

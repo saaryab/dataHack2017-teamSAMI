@@ -4,3 +4,4 @@ svm/__pycache__/*
 *.csv
 *.idea/*
 *__pycache__/*
+svm/logs/*
