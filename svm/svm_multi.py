@@ -2,17 +2,16 @@
 from sklearn import svm
 # from sklearn.model_selection import cross_val_score
 import threading
-from logger import Logger
 
 
 class SvmMulti:
 
-    def __init__(self, full_x_train, full_y_train, x_test, y_test):
+    def __init__(self, logger, full_x_train, full_y_train, x_test, y_test):
         self.__x_train = full_x_train
         self.__y_train = full_y_train
         self.__x_test = x_test
         self.__y_test = y_test
-        self.__logger = Logger()
+        self.__logger = logger
         self.__classifiers_list_lock = threading.Lock()
 
     @staticmethod
@@ -35,7 +34,7 @@ class SvmMulti:
 
         # create classifier for the given class
         self.__logger.log('build classifier for {class_name}'.format(class_name=class_name))
-        clf = svm.SVC(kernel='linear', C=1, max_iter=10000, probability=True)
+        clf = svm.SVC(kernel='linear', C=1, max_iter=100000)
 
         # train classifier and test performance
         self.__logger.log('train classifier of {class_name}'.format(class_name=class_name))
