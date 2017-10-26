@@ -1,0 +1,2 @@
+lstm-   0.078
+random forest (all vs. all)- 0.436
